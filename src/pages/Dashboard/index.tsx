@@ -1,12 +1,12 @@
-import Header from '../../components/Header';
-import api from '../../services/api';
-import Food from '../../components/Food';
-import ModalAddFood from '../../components/ModalAddFood';
-import ModalEditFood from '../../components/ModalEditFood';
-import { FoodsContainer } from './styles';
+import Header from "../../components/Header";
+import api from "../../services/api";
+import Food from "../../components/Food";
+import ModalAddFood from "../../components/ModalAddFood";
+import ModalEditFood from "../../components/ModalEditFood";
+import { FoodsContainer } from "./styles";
 
-import React, { useEffect, useState } from 'react';
-interface FoodInput {
+import React, { useEffect, useState } from "react";
+export interface FoodInput {
   id: number;
   name: string;
   description: string;
@@ -23,7 +23,7 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     async function loadFoods() {
-      const response = await api.get('/foods');
+      const response = await api.get("/foods");
 
       setFoods(response.data);
     }
@@ -32,9 +32,9 @@ const Dashboard: React.FC = () => {
 
   const handleAddFood = async (food: FoodInput) => {
     try {
-      const response = await api.post('/foods', {
+      const response = await api.post("/foods", {
         ...food,
-        available: true,
+        available: true
       });
 
       setFoods([...foods, response.data]);
@@ -47,7 +47,7 @@ const Dashboard: React.FC = () => {
     try {
       const foodUpdated = await api.put(`/foods/${editingFood.id}`, {
         ...editingFood,
-        ...food,
+        ...food
       });
 
       const foodsUpdated = foods.map((f) =>
